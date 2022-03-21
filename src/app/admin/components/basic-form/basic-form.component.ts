@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators,FormGroup } from '@angular/forms';
+import { FormControl, Validators,FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-basic-form',
@@ -8,19 +8,7 @@ import { FormControl, Validators,FormGroup } from '@angular/forms';
 })
 export class BasicFormComponent implements OnInit {
 
-  form= new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-    email: new FormControl(''),
-    phone: new FormControl(''),
-    color: new FormControl('#000000'),
-    date: new FormControl(''),
-    age: new FormControl(''),
-    category: new FormControl(''),
-    tag: new FormControl(''),
-    agree: new FormControl('false'),
-    gender: new FormControl(''),
-    zone: new FormControl(''),
-  });
+  form: FormGroup
 
   // nameField = new FormControl('');
   // emailField = new FormControl('');
@@ -36,7 +24,11 @@ export class BasicFormComponent implements OnInit {
   // genderField = new FormControl('');
   // zoneField = new FormControl('');
 
-  constructor() { }
+  constructor(
+    private formBuilder: FormBuilder
+  ) {
+    this.buildForm();
+  }
 
   ngOnInit(): void {
     this.nameField.valueChanges
@@ -45,14 +37,34 @@ export class BasicFormComponent implements OnInit {
     })
   }
 
-  save(event) {
-    console.log(this.form.value);
-
-  }
-
   getNameValue() {
     console.log(this.nameField.value);
   }
+
+  save(event) {
+    if (this.form.valid) {
+      console.log(this.form.value);
+    } else {
+      this.form.markAllAsTouched();
+    }
+  }
+
+  private buildForm() {
+    this.form = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.maxLength(10)]],
+      email: ['', Validators.required],
+      phone: [''],
+      color: ['#000000'],
+      date: [''],
+      age: ['', Validators.required],
+      category: [''],
+      tag: [''],
+      agree: ['', Validators.required],
+      gender: ['', Validators.required],
+      zone: [''],
+    });
+  }
+
 
   get nameField() {
     return this.form.get('name')

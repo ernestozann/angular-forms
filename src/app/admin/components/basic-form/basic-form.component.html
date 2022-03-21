@@ -27,8 +27,18 @@
 
   <p>
     Email: {{ emailField.value }}
-    <input type="email" formControlName="email" />
+    <input
+      [class.is-invalid]="isNameFieldInvalid"
+      type="email"
+      formControlName="email"
+    />
   </p>
+
+  <div class="messages" [class.active]="isNameFieldInvalid">
+    <p>
+      <strong *ngIf="emailField.touched && ageField.hasError('required')">Este campo es requerido</strong>
+    </p>
+  </div>
 
   <p>
     Phone: {{ phoneField.value }}
@@ -47,8 +57,18 @@
 
   <p>
     Age: {{ ageField.value }}
-    <input type="number" formControlName="age" />
+    <input
+      type="number"
+      formControlName="age"
+      [class.is-invalid]="isNameFieldInvalid"
+    />
   </p>
+
+  <div class="messages" [class.active]="isNameFieldInvalid">
+    <p>
+      <strong *ngIf="ageField.touched && ageField.hasError('required')">Este campo es requerido</strong>
+    </p>
+  </div>
 
   <p>
     Category: {{ categoryField.value }}
@@ -73,9 +93,18 @@
 
   <p>
     Agree: {{ agreeField.value }}
-    <input type="checkbox" formControlName="agree" />
+    <input
+      type="checkbox"
+      formControlName="agree"
+    />
     <label> No he leido los terminos y condiciones pero quiero proseguir</label>
   </p>
+
+  <div class="messages" [class.active]="isNameFieldInvalid">
+    <p>
+      <strong *ngIf="agreeField.touched && agreeField.hasError('required')">Este campo es requerido</strong>
+    </p>
+  </div>
 
   <p>
     Gender: {{ genderField.value }}
@@ -107,6 +136,12 @@
       Non binary
     </label>
   </p>
+
+  <div class="messages" [class.active]="isNameFieldInvalid">
+    <p>
+      <strong *ngIf="genderField.touched && genderField.hasError('required')">Este campo es requerido</strong>
+    </p>
+  </div>
 
   <p>
     Zone: {{ zoneField.value }}
@@ -140,7 +175,8 @@
   </p>
 
   <p>
-    <button type="submit">Enviar</button>
+    <button type="submit">Enviar (sin [disabled])</button>
+    <button [disabled]="form.invalid" type="submit">Enviar [disabled]</button>
   </p>
 </form>
 
