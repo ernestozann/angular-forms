@@ -1,6 +1,11 @@
 <p>
-  Name: {{ nameField.value }} {{ nameField.valid }}
-  <input type="text" [formControl]="nameField" />
+  Name: {{ nameField.valid }}
+  <input
+    [class.is-valid]="isNameFieldValid"
+    [class.is-invalid]="isNameFieldInvalid"
+    type="text"
+    [formControl]="nameField"
+  />
   <button [disabled]="nameField.invalid" (click)="getNameValue()">Get Value</button>
   <!-- <code>
     <pre>
@@ -9,13 +14,15 @@
   </code> -->
 </p>
 
-<p>
-  <strong *ngIf="nameField.touched && nameField.hasError('required')">Este campo es requerido</strong>
-</p>
+<div class="messages" [class.active]="isNameFieldInvalid">
+  <p>
+    <strong *ngIf="nameField.touched && nameField.hasError('required')">Este campo es requerido</strong>
+  </p>
 
-<p>
-  <strong *ngIf="nameField.dirty && nameField.hasError('maxlength')">Maximo 10 caracteres</strong>
-</p>
+  <p>
+    <strong *ngIf="nameField.dirty && nameField.hasError('maxlength')">Maximo 10 caracteres</strong>
+  </p>
+</div>
 
 <p>
   Email: {{ emailField.value }}
@@ -104,28 +111,28 @@
   Zone: {{ zoneField.value }}
   <label>
     <input
-    name="zone"
-    type="radio"
-    value="zona-1"
-    [formControl]="zoneField"
+      name="zone"
+      type="radio"
+      value="zona-1"
+      [formControl]="zoneField"
     />
     Zona 1
   </label>
   <label>
     <input
-    name="zone"
-    type="radio"
-    value="zona-2"
-    [formControl]="zoneField"
+      name="zone"
+      type="radio"
+      value="zona-2"
+      [formControl]="zoneField"
     />
     Zona 2
   </label>
   <label>
     <input
-    name="zone"
-    type="radio"
-    value="zona-3"
-    [formControl]="zoneField"
+      name="zone"
+      type="radio"
+      value="zona-3"
+      [formControl]="zoneField"
     />
     Zona 3
   </label>
