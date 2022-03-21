@@ -17,26 +17,37 @@
 
   <div class="messages" [class.active]="isNameFieldInvalid">
     <p>
-      <strong *ngIf="nameField.touched && nameField.hasError('required')">Este campo es requerido</strong>
+      <strong *ngIf="nameField.touched && nameField.hasError('required')">
+        Este campo es requerido
+      </strong>
     </p>
 
     <p>
-      <strong *ngIf="nameField.dirty && nameField.hasError('maxlength')">Maximo 10 caracteres</strong>
+      <strong *ngIf="nameField.dirty && nameField.hasError('maxlength')">
+        Maximo 10 caracteres
+      </strong>
     </p>
   </div>
 
   <p>
     Email: {{ emailField.value }}
     <input
-      [class.is-invalid]="isNameFieldInvalid"
+      [class.is-invalid]="isEmailFieldInvalid"
       type="email"
       formControlName="email"
     />
   </p>
 
-  <div class="messages" [class.active]="isNameFieldInvalid">
+  <div class="messages" [class.active]="isEmailFieldInvalid">
     <p>
-      <strong *ngIf="emailField.touched && ageField.hasError('required')">Este campo es requerido</strong>
+      <strong *ngIf="emailField.touched && emailField.hasError('required')">
+        Este campo es requerido
+      </strong>
+    </p>
+    <p>
+      <strong *ngIf="emailField.touched && emailField.hasError('email')">
+        Este no es un email valido
+      </strong>
     </p>
   </div>
 
@@ -60,13 +71,20 @@
     <input
       type="number"
       formControlName="age"
-      [class.is-invalid]="isNameFieldInvalid"
+      [class.is-invalid]="isAgeFieldInvalid"
     />
   </p>
 
   <div class="messages" [class.active]="isNameFieldInvalid">
     <p>
-      <strong *ngIf="ageField.touched && ageField.hasError('required')">Este campo es requerido</strong>
+      <strong *ngIf="ageField.touched && ageField.hasError('min')">
+        Edad minima 18 años
+      </strong>
+    </p>
+    <p>
+      <strong *ngIf="ageField.touched && ageField.hasError('max')">
+        Has roto el record de la persona mas vieja viva o mientes en tu edad
+      </strong>
     </p>
   </div>
 
@@ -100,9 +118,11 @@
     <label> No he leido los terminos y condiciones pero quiero proseguir</label>
   </p>
 
-  <div class="messages" [class.active]="isNameFieldInvalid">
+  <div class="messages" [class.active]="isAgreeFieldInvalid">
     <p>
-      <strong *ngIf="agreeField.touched && agreeField.hasError('required')">Este campo es requerido</strong>
+      <strong *ngIf="agreeField.touched && agreeField.hasError('required')">
+        Este campo es requerido
+      </strong>
     </p>
   </div>
 
@@ -137,9 +157,11 @@
     </label>
   </p>
 
-  <div class="messages" [class.active]="isNameFieldInvalid">
+  <div class="messages" [class.active]="isGenderFieldInvalid">
     <p>
-      <strong *ngIf="genderField.touched && genderField.hasError('required')">Este campo es requerido</strong>
+      <strong *ngIf="genderField.touched && genderField.hasError('required')">
+        Este campo es requerido
+      </strong>
     </p>
   </div>
 
@@ -175,8 +197,12 @@
   </p>
 
   <p>
-    <button type="submit">Enviar (sin [disabled])</button>
-    <button [disabled]="form.invalid" type="submit">Enviar [disabled]</button>
+    <button type="submit">
+      Enviar (sin [disabled])
+    </button>
+    <button [disabled]="form.invalid" type="submit">
+      Enviar [disabled]
+    </button>
   </p>
 </form>
 

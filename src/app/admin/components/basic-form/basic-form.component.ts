@@ -52,14 +52,14 @@ export class BasicFormComponent implements OnInit {
   private buildForm() {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required, Validators.maxLength(10)]],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       phone: [''],
       color: ['#000000'],
       date: [''],
-      age: ['', Validators.required],
+      age: [18, [Validators.required, Validators.min(18),Validators.max(125)]],
       category: [''],
       tag: [''],
-      agree: ['', Validators.required],
+      agree: [false, Validators.requiredTrue],
       gender: ['', Validators.required],
       zone: [''],
     });
@@ -118,4 +118,19 @@ export class BasicFormComponent implements OnInit {
     return this.nameField.touched && this.nameField.invalid;
   }
 
+  get isEmailFieldInvalid() {
+    return this.emailField.touched && this.emailField.invalid;
+  }
+
+  get isAgeFieldInvalid() {
+    return this.ageField.touched && this.ageField.invalid;
+  }
+
+  get isAgreeFieldInvalid() {
+    return this.agreeField.touched && this.agreeField.invalid;
+  }
+
+  get isGenderFieldInvalid() {
+    return this.genderField.touched && this.genderField.invalid;
+  }
 }
