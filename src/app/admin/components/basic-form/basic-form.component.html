@@ -1,139 +1,146 @@
-<p>
-  Name: {{ nameField.valid }}
-  <input
-    [class.is-valid]="isNameFieldValid"
-    [class.is-invalid]="isNameFieldInvalid"
-    type="text"
-    [formControl]="nameField"
-  />
-  <button [disabled]="nameField.invalid" (click)="getNameValue()">Get Value</button>
-  <!-- <code>
-    <pre>
-      {{ nameField | json}}
-    </pre>
-  </code> -->
-</p>
-
-<div class="messages" [class.active]="isNameFieldInvalid">
+<form [formGroup]="form" (ngSubmit)="save($event)">
   <p>
-    <strong *ngIf="nameField.touched && nameField.hasError('required')">Este campo es requerido</strong>
+    Name: {{ nameField.valid }}
+    <input
+      [class.is-valid]="isNameFieldValid"
+      [class.is-invalid]="isNameFieldInvalid"
+      type="text"
+      formControlName="name"
+    />
+    <button [disabled]="nameField.invalid" (click)="getNameValue()">Get Value</button>
+    <!-- <code>
+      <pre>
+        {{ nameField | json}}
+      </pre>
+    </code> -->
+  </p>
+
+  <div class="messages" [class.active]="isNameFieldInvalid">
+    <p>
+      <strong *ngIf="nameField.touched && nameField.hasError('required')">Este campo es requerido</strong>
+    </p>
+
+    <p>
+      <strong *ngIf="nameField.dirty && nameField.hasError('maxlength')">Maximo 10 caracteres</strong>
+    </p>
+  </div>
+
+  <p>
+    Email: {{ emailField.value }}
+    <input type="email" formControlName="email" />
   </p>
 
   <p>
-    <strong *ngIf="nameField.dirty && nameField.hasError('maxlength')">Maximo 10 caracteres</strong>
+    Phone: {{ phoneField.value }}
+    <input type="tel" formControlName="phone" />
   </p>
-</div>
 
-<p>
-  Email: {{ emailField.value }}
-  <input type="email" [formControl]="emailField" />
-</p>
+  <p>
+    Color: {{ colorField.value }}
+    <input type="color" formControlName="color" />
+  </p>
 
-<p>
-  Phone: {{ phoneField.value }}
-  <input type="tel" [formControl]="phoneField" />
-</p>
+  <p>
+    Date: {{ dateField.value }}
+    <input type="date" formControlName="date" />
+  </p>
 
-<p>
-  Color: {{ colorField.value }}
-  <input type="color" [formControl]="colorField" />
-</p>
+  <p>
+    Age: {{ ageField.value }}
+    <input type="number" formControlName="age" />
+  </p>
 
-<p>
-  Date: {{ dateField.value }}
-  <input type="date" [formControl]="dateField" />
-</p>
+  <p>
+    Category: {{ categoryField.value }}
+    <select formControlName="category">
+      <option value="category-1">category 1</option>
+      <option value="category-2">category 2</option>
+      <option value="category-3">category 3</option>
+      <option value="category-4">category 4</option>
+    </select>
+  </p>
 
-<p>
-  Age: {{ ageField.value }}
-  <input type="number" [formControl]="ageField" />
-</p>
+  <p>
+    Tags: {{ tagField.value }}
+    <select formControlName="tag" multiple>
+      <option value="tag-1">tag 1</option>
+      <option value="tag-2">tag 2</option>
+      <option value="tag-3">tag 3</option>
+      <option value="tag-4">tag 4</option>
+    </select>
+    <label> shift + click, para seleccionar mas de 1</label>
+  </p>
 
-<p>
-  Category: {{ categoryField.value }}
-  <select [formControl]="categoryField">
-    <option value="category-1">category 1</option>
-    <option value="category-2">category 2</option>
-    <option value="category-3">category 3</option>
-    <option value="category-4">category 4</option>
-  </select>
-</p>
+  <p>
+    Agree: {{ agreeField.value }}
+    <input type="checkbox" formControlName="agree" />
+    <label> No he leido los terminos y condiciones pero quiero proseguir</label>
+  </p>
 
-<p>
-  Tags: {{ tagField.value }}
-  <select [formControl]="tagField" multiple>
-    <option value="tag-1">tag 1</option>
-    <option value="tag-2">tag 2</option>
-    <option value="tag-3">tag 3</option>
-    <option value="tag-4">tag 4</option>
-  </select>
-  <label> shift + click, para seleccionar mas de 1</label>
-</p>
+  <p>
+    Gender: {{ genderField.value }}
+    <label>
+      <input
+        name="gender"
+        type="radio"
+        value="male"
+        formControlName="gender"
+      />
+      Male
+    </label>
+    <label>
+      <input
+        name="gender"
+        type="radio"
+        value="female"
+        formControlName="gender"
+      />
+      Female
+    </label>
+    <label>
+      <input
+        name="gender"
+        type="radio"
+        value="non-binary"
+        formControlName="gender"
+      />
+      Non binary
+    </label>
+  </p>
 
-<p>
-  Agree: {{ agreeField.value }}
-  <input type="checkbox" [formControl]="agreeField" />
-  <label> No he leido los terminos y condiciones pero quiero proseguir</label>
-</p>
+  <p>
+    Zone: {{ zoneField.value }}
+    <label>
+      <input
+        name="zone"
+        type="radio"
+        value="zona-1"
+        formControlName="zone"
+      />
+      Zona 1
+    </label>
+    <label>
+      <input
+        name="zone"
+        type="radio"
+        value="zona-2"
+        formControlName="zone"
+      />
+      Zona 2
+    </label>
+    <label>
+      <input
+        name="zone"
+        type="radio"
+        value="zona-3"
+        formControlName="zone"
+      />
+      Zona 3
+    </label>
+  </p>
 
-<p>
-  Gender: {{ genderField.value }}
-  <label>
-    <input
-      name="gender"
-      type="radio"
-      value="male"
-      [formControl]="genderField"
-    />
-    Male
-  </label>
-  <label>
-    <input
-      name="gender"
-      type="radio"
-      value="female"
-      [formControl]="genderField"
-    />
-    Female
-  </label>
-  <label>
-    <input
-      name="gender"
-      type="radio"
-      value="non-binary"
-      [formControl]="genderField"
-    />
-    Non binary
-  </label>
-</p>
+  <p>
+    <button type="submit">Enviar</button>
+  </p>
+</form>
 
-<p>
-  Zone: {{ zoneField.value }}
-  <label>
-    <input
-      name="zone"
-      type="radio"
-      value="zona-1"
-      [formControl]="zoneField"
-    />
-    Zona 1
-  </label>
-  <label>
-    <input
-      name="zone"
-      type="radio"
-      value="zona-2"
-      [formControl]="zoneField"
-    />
-    Zona 2
-  </label>
-  <label>
-    <input
-      name="zone"
-      type="radio"
-      value="zona-3"
-      [formControl]="zoneField"
-    />
-    Zona 3
-  </label>
-</p>
