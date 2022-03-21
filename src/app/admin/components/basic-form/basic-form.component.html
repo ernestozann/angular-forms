@@ -1,6 +1,6 @@
 <p>
-  Name: {{ nameField.value}}
-  <input type="text" [formControl]="nameField">
+  Name: {{ nameField.value }}
+  <input type="text" [formControl]="nameField" />
   <button (click)="getNameValue()">Get Value</button>
   <!-- <code>
     <pre>
@@ -11,27 +11,27 @@
 
 <p>
   Email: {{ emailField.value }}
-  <input type="email" [formControl]="emailField">
+  <input type="email" [formControl]="emailField" />
 </p>
 
 <p>
   Phone: {{ phoneField.value }}
-  <input type="tel" [formControl]="phoneField">
+  <input type="tel" [formControl]="phoneField" />
 </p>
 
 <p>
   Color: {{ colorField.value }}
-  <input type="color" [formControl]="colorField">
+  <input type="color" [formControl]="colorField" />
 </p>
 
 <p>
   Date: {{ dateField.value }}
-  <input type="date" [formControl]="dateField">
+  <input type="date" [formControl]="dateField" />
 </p>
 
 <p>
   Age: {{ ageField.value }}
-  <input type="number" [formControl]="ageField">
+  <input type="number" [formControl]="ageField" />
 </p>
 
 <p>
@@ -53,4 +53,72 @@
     <option value="tag-4">tag 4</option>
   </select>
   <label> shift + click, para seleccionar mas de 1</label>
+</p>
+
+<p>
+  Agree: {{ agreeField.value }}
+  <input type="checkbox" [formControl]="agreeField" />
+  <label> No he leido los terminos y condiciones pero quiero proseguir</label>
+</p>
+
+<p>
+  Gender: {{ genderField.value }}
+  <label>
+    <input
+      name="gender"
+      type="radio"
+      value="male"
+      [formControl]="genderField"
+    />
+    Male
+  </label>
+  <label>
+    <input
+      name="gender"
+      type="radio"
+      value="female"
+      [formControl]="genderField"
+    />
+    Female
+  </label>
+  <label>
+    <input
+      name="gender"
+      type="radio"
+      value="non-binary"
+      [formControl]="genderField"
+    />
+    Non binary
+  </label>
+</p>
+
+<p>
+  Zone: {{ zoneField.value }}
+  <label>
+    <input
+    name="zone"
+    type="radio"
+    value="zona-1"
+    [formControl]="zoneField"
+    />
+    Zona 1
+  </label>
+  <label>
+    <input
+    name="zone"
+    type="radio"
+    value="zona-2"
+    [formControl]="zoneField"
+    />
+    Zona 2
+  </label>
+  <label>
+    <input
+    name="zone"
+    type="radio"
+    value="zona-3"
+    [formControl]="zoneField"
+    />
+    Zona 3
+  </label>
 </p>
