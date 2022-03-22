@@ -10,20 +10,6 @@ export class BasicFormComponent implements OnInit {
 
   form: FormGroup
 
-  // nameField = new FormControl('');
-  // emailField = new FormControl('');
-  // phoneField = new FormControl('');
-  // colorField = new FormControl('#000000');
-  // dateField = new FormControl('');
-  // ageField = new FormControl('');
-
-  // categoryField = new FormControl('');
-  // tagField = new FormControl('');
-
-  // agreeField = new FormControl(false);
-  // genderField = new FormControl('');
-  // zoneField = new FormControl('');
-
   constructor(
     private formBuilder: FormBuilder
   ) {
@@ -31,10 +17,10 @@ export class BasicFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.nameField.valueChanges
-    .subscribe(value => {
-      console.log(value);
-    })
+    // this.nameField.valueChanges
+    // .subscribe(value => {
+    //   console.log(value);
+    // })
   }
 
   getNameValue() {
@@ -51,7 +37,10 @@ export class BasicFormComponent implements OnInit {
 
   private buildForm() {
     this.form = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.maxLength(10)]],
+      fullName: this.formBuilder.group({
+        name: ['', [Validators.required, Validators.maxLength(10)]],
+        last: ['', [Validators.required, Validators.maxLength(10)]],
+      }),
       email: ['', [Validators.required, Validators.email]],
       phone: [''],
       color: ['#000000'],
@@ -67,7 +56,11 @@ export class BasicFormComponent implements OnInit {
 
 
   get nameField() {
-    return this.form.get('name')
+    return this.form.get("fullName.name")
+  }
+
+  get lastField() {
+    return this.form.get("fullName.last")
   }
 
   get emailField() {
