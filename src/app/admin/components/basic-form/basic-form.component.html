@@ -1,40 +1,24 @@
 <form [formGroup]="form" (ngSubmit)="save($event)">
   <div formGroupName="fullName">
-    <p>
-      Name: {{ nameField.valid }}
-      <input
-        [class.is-valid]="isNameFieldValid"
-        [class.is-invalid]="isNameFieldInvalid"
-        type="text"
-        formControlName="name"
-      />
-      <button [disabled]="nameField.invalid" (click)="getNameValue()">Get Value</button>
-      <!-- <code>
-        <pre>
-          {{ nameField | json}}
-        </pre>
-      </code> -->
-    </p>
-  
+    <mat-form-field appearance="fill">
+      <mat-label>Name: {{ nameField.value }}</mat-label>
+      <input matInput type="text" formControlName="name" />
+      <mat-icon matStuffix *ngIf="isNameFieldValid">done</mat-icon>
+      <mat-icon matStuffix *ngIf="isNameFieldInvalid">close</mat-icon>
+    </mat-form-field>
+
     <div class="messages" [class.active]="isNameFieldInvalid">
-      <p>
-        <strong *ngIf="nameField.touched && nameField.hasError('required')">
-          Este campo es requerido
-        </strong>
-      </p>
-  
-      <p>
-        <strong *ngIf="nameField.dirty && nameField.hasError('maxlength')">
-          Maximo 10 caracteres
-        </strong>
-      </p>
+      <mat-error *ngIf="nameField.touched && nameField.hasError('required')">
+        Este campo es requerido
+      </mat-error>
+      <mat-error *ngIf="nameField.dirty && nameField.hasError('maxlength')">
+        Maximo 10 caracteres
+      </mat-error>
     </div>
+
     <p>
       last Name: {{ lastField.valid }}
-      <input
-        type="text"
-        formControlName="name"
-      />
+      <input type="text" formControlName="name" />
     </p>
   </div>
 
@@ -120,10 +104,7 @@
 
   <p>
     Agree: {{ agreeField.value }}
-    <input
-      type="checkbox"
-      formControlName="agree"
-    />
+    <input type="checkbox" formControlName="agree" />
     <label> No he leido los terminos y condiciones pero quiero proseguir</label>
   </p>
 
@@ -138,12 +119,7 @@
   <p>
     Gender: {{ genderField.value }}
     <label>
-      <input
-        name="gender"
-        type="radio"
-        value="male"
-        formControlName="gender"
-      />
+      <input name="gender" type="radio" value="male" formControlName="gender" />
       Male
     </label>
     <label>
@@ -177,41 +153,21 @@
   <p>
     Zone: {{ zoneField.value }}
     <label>
-      <input
-        name="zone"
-        type="radio"
-        value="zona-1"
-        formControlName="zone"
-      />
+      <input name="zone" type="radio" value="zona-1" formControlName="zone" />
       Zona 1
     </label>
     <label>
-      <input
-        name="zone"
-        type="radio"
-        value="zona-2"
-        formControlName="zone"
-      />
+      <input name="zone" type="radio" value="zona-2" formControlName="zone" />
       Zona 2
     </label>
     <label>
-      <input
-        name="zone"
-        type="radio"
-        value="zona-3"
-        formControlName="zone"
-      />
+      <input name="zone" type="radio" value="zona-3" formControlName="zone" />
       Zona 3
     </label>
   </p>
 
   <p>
-    <button type="submit">
-      Enviar (sin [disabled])
-    </button>
-    <button [disabled]="form.invalid" type="submit">
-      Enviar [disabled]
-    </button>
+    <button type="submit">Enviar (sin [disabled])</button>
+    <button [disabled]="form.invalid" type="submit">Enviar [disabled]</button>
   </p>
 </form>
-
