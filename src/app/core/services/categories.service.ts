@@ -25,4 +25,8 @@ export class CategoriesService {
 		return this.httpClient.put<Category>(`${environment.url_api}/categories/${id}`, data)
 	}
 
+	checkCategory(name:string) {
+		return this.httpClient.post(`${environment.url_api}/categories/availability`, {name})
+	}
+
 }

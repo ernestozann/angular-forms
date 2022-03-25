@@ -25,6 +25,12 @@
 						<mat-error *ngIf="imageField.hasError('required')">
 							Este campo es requerido
 						</mat-error>
+						<mat-error *ngIf="imageField.hasError('minlenght')">
+							Debe contener minimo 4 caracteres
+						</mat-error>
+						<mat-error *ngIf="imageField.hasError('not_available')">
+							Este nombre ya lo tiene otra categoria
+						</mat-error>
 					</div>
 				</div>
 			</div>
