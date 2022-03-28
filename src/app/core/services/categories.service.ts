@@ -17,6 +17,10 @@ export class CategoriesService {
 		return this.httpClient.get<Category[]>(`${environment.url_api}/categories/`)
 	}
 
+	getCategory(id: string) {
+		return this.httpClient.get<Category>(`${environment.url_api}/categories/${id}`)
+	}
+
 	createCategory(data: Partial<Category>) {
 		return this.httpClient.post<Category>(`${environment.url_api}/categories/`, data)
 	}

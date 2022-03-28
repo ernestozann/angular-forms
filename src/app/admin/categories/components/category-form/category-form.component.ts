@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { CategoriesService } from './../../../../core/services/categories.service'
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { MyValidators } from 'src/app/utils/validators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-category-form',
@@ -14,17 +15,26 @@ import { MyValidators } from 'src/app/utils/validators';
 export class CategoryFormComponent implements OnInit {
 
   form: FormGroup
+  image$: Observable<string>
+  categoryId: string
 
   constructor(
     private formBuilder: FormBuilder,
     private categoriesService: CategoriesService,
     private router: Router,
     private storage: AngularFireStorage,
+    private activatedRoute: ActivatedRoute,
   ) {
     this.buildForm();
   }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.categoryId = params.id
+      if (this.categoryId) {
+        this.getCategory()
+      }
+    })
   }
 
   private buildForm() {
@@ -56,6 +66,14 @@ export class CategoryFormComponent implements OnInit {
     .subscribe(rta => {
       console.log(rta);
       this.router.navigate(['./admin/categories'])
+    })
+  }
+
+  private getCategory() {
+    const data = this.form.value
+    this.categoriesService.getCategory(this.categoryId)
+    .subscribe(data => {
+      this.form.patchValue(data)
     })
   }
 

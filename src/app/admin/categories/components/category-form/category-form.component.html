@@ -20,6 +20,7 @@
 			<div class="row">
 				<div class="col-xs">
 					<img *ngIf="imageField.value" [src]="imageField.value">
+					<!-- <img *ngIf="(image$ | async) as image" [src]="image"> -->
 					<input (change)="uploadFile($event)" placeholder="Image" type="file">
 					<div class="messages" *ngIf="imageField.touched && imageField.invalid">
 						<mat-error *ngIf="imageField.hasError('required')">
