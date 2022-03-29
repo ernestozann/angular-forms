@@ -4,6 +4,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { MyValidators } from './../../../../utils/validators';
 import { ProductsService } from './../../../../core/services/products/products.service';
+import { CategoriesService } from 'src/app/core/services/categories.service';
+import { Category } from 'src/app/core/models/category.model';
 
 @Component({
   selector: 'app-product-edit',
@@ -14,10 +16,12 @@ export class ProductEditComponent implements OnInit {
 
   form: FormGroup;
   id: string;
+  categories: Category[] = []
 
   constructor(
     private formBuilder: FormBuilder,
     private productsService: ProductsService,
+    private categoriesService: CategoriesService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
@@ -32,6 +36,7 @@ export class ProductEditComponent implements OnInit {
         this.form.patchValue(product);
       });
     });
+    this.getCategories()
   }
 
   saveProduct(event: Event) {
@@ -48,16 +53,23 @@ export class ProductEditComponent implements OnInit {
 
   private buildForm() {
     this.form = this.formBuilder.group({
-      id: ['', [Validators.required]],
-      title: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       price: ['', [Validators.required, MyValidators.isPriceValid]],
       image: [''],
       description: ['', [Validators.required]],
+      category_id: ['', [Validators.required]],
     });
   }
 
   get priceField() {
     return this.form.get('price');
+  }
+
+  private getCategories() {
+    this.categoriesService.getAllCategories()
+    .subscribe((data) => {
+      this.categories = data
+    })
   }
 
 }
